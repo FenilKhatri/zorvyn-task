@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { SIDEBAR_LINKS } from "../../utils/constants";
 import { LogOut, Zap } from "lucide-react";
 
@@ -14,7 +14,8 @@ const Sidebar = () => {
          : "text-slate-400 hover:text-white hover:bg-white/5"
      }`;
   
-     const role = JSON.parse(localStorage.getItem("Role"));
+     const role = localStorage.getItem("Role")?.toLowerCase();
+     if(!role) <Navigate to="/" replace = { true } />
      const filteredLinks = role === "admin" ? SIDEBAR_LINKS : SIDEBAR_LINKS.filter((link) => link.roles.includes("user"));
   
      const handleLogout = () => {

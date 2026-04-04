@@ -2,30 +2,20 @@ import { Search, Moon } from "lucide-react";
 
 const Navbar = () => {
 
-  const role = JSON.parse(localStorage.getItem("Role") || "");
+  const role = localStorage.getItem("Role").toLowerCase();
 
   const roleName = role
     ? role.charAt(0).toUpperCase() + role.slice(1)
     : "Guest";
 
   return (
-    <div className="w-full flex items-center justify-between px-6 py-3 bg-[#020617] backdrop-blur-md border-b border-white/5">
+    <div className="w-full top-0 sticky flex items-center justify-between px-6 py-3 bg-[#020617]/30 backdrop-blur-md border-b border-white/5 z-100">
       {/* Left - Page Title */}
       <div>
         <h1 className="text-white text-lg font-semibold">
           {roleName} Dashboard
         </h1>
         <p className="text-xs text-slate-400">Welcome back 👋</p>
-      </div>
-
-      {/* Center - Search */}
-      <div className="hidden md:flex items-center w-1/3 relative">
-        <Search size={16} className="absolute left-3 text-slate-400" />
-        <input
-          type="text"
-          placeholder="Search..."
-          className="w-full pl-9 pr-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-        />
       </div>
 
       {/* Right - Actions */}

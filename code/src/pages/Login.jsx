@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ROLES } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
+import { financeData as DefaultData } from "../data/financeData";
 
 const Login = () => {
   const [role, setRole] = useState("");
@@ -8,9 +9,11 @@ const Login = () => {
 
   const handleLogin = () => {
     if (!role) return alert("Please select a role");
-    localStorage.setItem("Role", JSON.stringify(role));
+    localStorage.setItem("Role", role);
     navigate("/dashboard");
   };
+
+  if(!localStorage.getItem("formData")) localStorage.setItem("formData", JSON.stringify(DefaultData));
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 px-4">

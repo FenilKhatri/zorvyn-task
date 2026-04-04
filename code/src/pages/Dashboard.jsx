@@ -1,11 +1,12 @@
 import Layout from "../components/layouts/Layout";
+import DashboardCard from "../components/reusable/DashboardCard";
 
 const Dashboard = () => {
   return (
     <>
       <Layout>
         <div className="w-full h-full p-3">
-          Analytics
+          <DashboardCard />
         </div>
       </Layout>
     </>
