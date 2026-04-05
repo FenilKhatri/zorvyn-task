@@ -11,45 +11,28 @@ import {
 import { cardsData } from "../../data/cardData";
 import { useEffect, useState } from "react";
 
-const DashboardCard = () => {
-
+const DashboardCard = ({ cardState, setCardState }) => {
   const iconMap = {
     Income: TrendingUp,
     Expense: TrendingDown,
     Savings: PiggyBank,
   };
 
-  const [cardState, setCardState] = useState(() => {
-    try {
-      const saved = localStorage.getItem("financeData");
-      const parsed = JSON.parse(saved);
-
-      if (Array.isArray(parsed)) {
-        return parsed.map((item) => ({
-          ...item,
-          icon: iconMap[item.title],
-        }));
-      } else {
-        return cardsData;
-      }
-    } catch (error) {
-      return cardsData;
-    }
-  });
   const [editingIndex, setEditingIndex] = useState(null);
   const [tempValue, setTempValue] = useState("");
+  const safeState = cardState || [];
 
   const role = localStorage.getItem("Role");
 
-  const income = cardState.find((item) => item.title === "Income")?.amount || 0;
+  const income = safeState.find((item) => item.title === "Income")?.amount || 0;
 
   const expense =
-    cardState.find((item) => item.title === "Expense")?.amount || 0;
+    safeState.find((item) => item.title === "Expense")?.amount || 0;
 
   const savingTotal =
-    cardState.find((item) => item.title === "Savings")?.amount || 0;
+    safeState.find((item) => item.title === "Savings")?.amount || 0;
   const savingGoal =
-    cardState.find((item) => item.title === "Savings")?.goal || 0;
+    safeState.find((item) => item.title === "Savings")?.goal || 0;
 
   const totalBalance = income - expense;
   const remainingSavings = savingGoal - savingTotal;
@@ -63,14 +46,14 @@ const DashboardCard = () => {
     const updated = [...cardState];
     updated[index].amount = Number(tempValue);
     setCardState(updated);
+
+    localStorage.setItem("financeData", JSON.stringify(updated));
     setEditingIndex(null);
   };
 
-  useEffect(() => {
-    const cleanedData = cardState.map(({ icon, ...rest }) => rest);
-
-    localStorage.setItem("financeData", JSON.stringify(cleanedData));
-  }, [cardState]);
+  if (!cardState) {
+    return <div className="text-white p-5">Loading...</div>;
+  }
 
   return (
     <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -107,7 +90,7 @@ const DashboardCard = () => {
 
       {/* CARDS */}
       {cardState?.map((data, index) => {
-        const Icon = data?.icon;
+        const Icon = iconMap[data.title];
         const isEditing = editingIndex === index;
 
         return (

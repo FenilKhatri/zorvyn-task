@@ -2,7 +2,7 @@ import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { SIDEBAR_LINKS } from "../../utils/constants";
 import { LogOut, Zap } from "lucide-react";
 
-const Sidebar = () => {
+const Sidebar = ({ className }) => {
 
   const navigate = useNavigate();
 
@@ -24,7 +24,9 @@ const Sidebar = () => {
      }
 
   return (
-    <div className="hidden md:flex flex-col justify-between w-72 min-h-screen bg-linear-to-b from-[#020617] via-[#020617] to-[#020617] border-r border-white/5 text-white">
+    <div
+      className={`hidden md:flex flex-col justify-between w-72 min-h-screen bg-linear-to-b from-[#020617] via-[#020617] to-[#020617] border-r border-white/5 text-white ${className}`}
+    >
       {/* Top */}
       <div className="p-5">
         {/* Logo */}
@@ -68,7 +70,10 @@ const Sidebar = () => {
           </button>
         </div>
 
-        <button className="mt-4 w-full py-2 rounded-lg bg-red-500 hover:bg-red-500/80 text-md font-medium flex items-center justify-center gap-3 transition duration-300 cursor-pointer" onClick={handleLogout}>
+        <button
+          className="mt-4 w-full py-2 rounded-lg bg-red-500 hover:bg-red-500/80 text-md font-medium flex items-center justify-center gap-3 transition duration-300 cursor-pointer"
+          onClick={handleLogout}
+        >
           Logout
           <LogOut size={16} />
         </button>
