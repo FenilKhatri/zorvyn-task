@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 const ProtectedRoutes = () => {
-  const role = JSON.parse(localStorage.getItem("Role"));
+  const role = localStorage.getItem("Role");
   const location = useLocation();
 
   const isRestricted =
