@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <div className="w-full px-6 py-4 bg-[#020617] backdrop-blur-md border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-3">
+    <footer className="w-full px-6 py-4 bg-[#020617] border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-3">
       {/* Left */}
       <p className="text-sm text-slate-400">
         © {new Date().getFullYear()} NovaFin. All rights reserved.
@@ -8,15 +8,9 @@ const Footer = () => {
 
       {/* Center Links */}
       <div className="flex items-center gap-6 text-sm text-slate-400">
-        <span className="hover:text-white cursor-pointer transition">
-          Privacy
-        </span>
-        <span className="hover:text-white cursor-pointer transition">
-          Terms
-        </span>
-        <span className="hover:text-white cursor-pointer transition">
-          Support
-        </span>
+        <button className="hover:text-white transition">Privacy</button>
+        <button className="hover:text-white transition">Terms</button>
+        <button className="hover:text-white transition">Support</button>
       </div>
 
       {/* Right */}
@@ -26,7 +20,7 @@ const Footer = () => {
           Online
         </span>
       </div>
-    </div>
+    </footer>
   );
 };
 

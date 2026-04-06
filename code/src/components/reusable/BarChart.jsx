@@ -21,45 +21,46 @@ const OverviewChart = ({ data }) => {
   }
 
   return (
-    <div className="w-full h-80 text-white">
-      {/* Header */}
+    <div className="w-full text-white">
       <div className="mb-3">
         <h2 className="text-lg font-semibold">Financial Overview</h2>
         <p className="text-sm text-gray-400">Income vs Expense vs Savings</p>
       </div>
 
       {/* Chart */}
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} barSize={50}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+      <div className="w-full h-75">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={data} barSize={50}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
 
-          <XAxis dataKey="name" stroke="#9ca3af" tick={{ fontSize: 12 }} />
+            <XAxis dataKey="name" stroke="#9ca3af" tick={{ fontSize: 12 }} />
 
-          <YAxis
-            stroke="#9ca3af"
-            tickFormatter={(value) => `₹${value / 1000}k`}
-          />
+            <YAxis
+              stroke="#9ca3af"
+              tickFormatter={(value) => `₹${value / 1000}k`}
+            />
 
-          <Tooltip
-            contentStyle={{
-              backgroundColor: "#1f2937",
-              border: "none",
-              borderRadius: "8px",
-              color: "#ffffff",
-            }}
-            formatter={(value) => `₹ ${value}`}
-          />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#1f2937",
+                border: "none",
+                borderRadius: "8px",
+                color: "#ffffff",
+              }}
+              formatter={(value) => `₹ ${value}`}
+            />
 
-          <Bar dataKey="amount" radius={[10, 10, 0, 0]}>
-            {data.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[entry.name] || "#3b82f6"}
-              />
-            ))}
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
+            <Bar dataKey="amount" radius={[10, 10, 0, 0]}>
+              {data.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[entry.name] || "#3b82f6"}
+                />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };

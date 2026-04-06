@@ -1,21 +1,32 @@
-import Sidebar from '../common/Sidebar'
-import Navbar from '../common/Navbar'
-import Footer from '../common/Footer'
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
+import Sidebar from "../common/Sidebar";
+import Navbar from "../common/Navbar";
+import Footer from "../common/Footer";
 
-const Layout = ({ children }) => {
+const Layout = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <>
-      <div className="min-h-screen w-full flex bg-gray-200">
-        <Sidebar className=" top-0 sticky" />
+    <div className="min-h-screen w-full flex bg-gray-200">
+      {/* Sidebar */}
+      <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
 
-        <main className="flex flex-col flex-1 bg-[#020617]">
-          <Navbar />
-          <div className="flex-1 bg-[#020617] text-white">{children}</div>
-          <Footer />
-        </main>
-      </div>
-    </>
+      {/* Main Content */}
+      <main className="flex flex-col flex-1 bg-[#020617]">
+        {/* Navbar */}
+        <Navbar setIsOpen={setIsOpen} />
+
+        {/* Page Content */}
+        <div className="flex-1 text-white p-3">
+          <Outlet />
+        </div>
+
+        {/* Footer */}
+        <Footer />
+      </main>
+    </div>
   );
 };
 
-export default Layout
+export default Layout;

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Layout from "../components/layouts/Layout";
 import DashboardCard from "../components/reusable/DashboardCard";
 import IncomePieChart from "../components/reusable/PieChart";
 import OverviewBarChart from "../components/reusable/BarChart";
@@ -25,36 +24,34 @@ const Dashboard = () => {
   }
 
   return (
-    <Layout>
-      <div className="flex flex-col space-y-5 w-full h-full p-3">
-        {/* ✅ Correct props */}
-        <DashboardCard cardState={financeData} setCardState={setFinanceData} />
+    <div className="flex flex-col space-y-5 w-full h-full p-3">
+      {/* ✅ Correct props */}
+      <DashboardCard cardState={financeData} setCardState={setFinanceData} />
 
-        {/* Pie Charts */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div className="p-4 border border-slate-600 bg-white/5 rounded-xl shadow-lg">
-            <IncomePieChart
-              data={incomeData}
-              title="Income Distribution"
-              description="By Source"
-            />
-          </div>
-
-          <div className="p-4 border border-slate-600 bg-white/5 rounded-xl shadow-lg">
-            <IncomePieChart
-              data={expenseData}
-              title="Expense Distribution"
-              description="By Category"
-            />
-          </div>
+      {/* Pie Charts */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+        <div className="p-4 border border-slate-600 bg-white/5 rounded-xl shadow-lg w-full overflow-hidden min-w-0">
+          <IncomePieChart
+            data={incomeData}
+            title="Income Distribution"
+            description="By Source"
+          />
         </div>
 
-        {/* Bar Chart */}
-        <div className="p-4 border border-slate-600 bg-white/5 rounded-xl shadow-lg">
-          <OverviewBarChart data={overviewData} />
+        <div className="p-4 border border-slate-600 bg-white/5 rounded-xl shadow-lg w-full overflow-hidden min-w-0">
+          <IncomePieChart
+            data={expenseData}
+            title="Expense Distribution"
+            description="By Category"
+          />
         </div>
       </div>
-    </Layout>
+
+      {/* Bar Chart */}
+      <div className="p-4 border border-slate-600 bg-white/5 rounded-xl shadow-lg w-full overflow-hidden min-w-0">
+        <OverviewBarChart data={overviewData} />
+      </div>
+    </div>
   );
 };
 
